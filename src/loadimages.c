@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 10:28:11 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/17 12:21:14 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/17 17:00:47 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,30 @@
 t_img	*set_up_images(void *mlx_ptr)
 {
 	t_img	*images;
-	char	*path;
-	int		i;
+	int		w;
+	int		h;
 
-	i = 0;
-	path = ft_strdup("./img/0.xpm");
-	images = malloc(sizeof(t_img) * 4);
-	if (!images)
-		ft_printf("ERROR IMAGES");
-	while (i < 4)
-	{
-		path[6] = '0' + i;
-		ft_printf("El path es: %s", path);
-		images[i].path = ft_strdup(path);
-		images[i].height = 13;
-		images[i].width = 19;
-		images[i].imgptr = mlx_xpm_file_to_image(mlx_ptr, path, &images[i].width, &images[i].height);
-		if (images[i].imgptr == NULL)
-			ft_printf("NULL!!");
-		i++;
-	}
-	free(path);
+	w = GAME_W;
+	h = GAME_H;
+	images = malloc(sizeof(t_img));
+	images->empty = mlx_xpm_file_to_image(mlx_ptr, "./img/empty.xpm", &w, &h);
+	images->exit = mlx_xpm_file_to_image(mlx_ptr, "./img/exit.xpm", &w, &h);
+	images->hero = mlx_xpm_file_to_image(mlx_ptr, "./img/hero.xpm", &w, &h);
+	images->item = mlx_xpm_file_to_image(mlx_ptr, "./img/item.xpm", &w, &h);
+	images->wall1 = mlx_xpm_file_to_image(mlx_ptr, "./img/wall1.xpm", &w, &h);
+	images->wall2 = mlx_xpm_file_to_image(mlx_ptr, "./img/wall2.xpm", &w, &h);
+	images->wall3 = mlx_xpm_file_to_image(mlx_ptr, "./img/wall3.xpm", &w, &h);
+
 	return (images);
+}
+
+void unload_images(t_game *game)
+{
+	mlx_destroy_image(game->mlx, game->images->empty);
+	mlx_destroy_image(game->mlx, game->images->wall1);
+	mlx_destroy_image(game->mlx, game->images->wall2);
+	mlx_destroy_image(game->mlx, game->images->wall3);
+	mlx_destroy_image(game->mlx, game->images->hero);
+	mlx_destroy_image(game->mlx, game->images->exit);
+	mlx_destroy_image(game->mlx, game->images->item);
 }

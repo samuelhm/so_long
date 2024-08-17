@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   x11_utils.c                                        :+:      :+:    :+:   */
+/*   paintwindows.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/17 10:12:29 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/17 17:00:47 by shurtado         ###   ########.fr       */
+/*   Created: 2024/08/17 15:23:29 by shurtado          #+#    #+#             */
+/*   Updated: 2024/08/17 15:30:34 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-int	close_window(t_game *game)
+void paint(void *mlx, void *mlx_win, t_img *images)
 {
-	unload_images(game);
-	mlx_destroy_window(game->mlx, game->mlx_win);
-	mlx_destroy_display(game->mlx);
-	free(game);
-	exit(0);
-	return (0);
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < 640)
+	{
+		j = 0;
+		while (j < 640)
+		{
+			mlx_put_image_to_window(mlx, mlx_win, images->empty, i, j);
+			j += 32;
+		}
+		i += 32;
+	}
 }

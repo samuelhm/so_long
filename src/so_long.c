@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 22:09:45 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/17 10:45:12 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/17 17:01:04 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,15 @@
 
 int	main(void)
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_img	*images;
+	t_game	*game;
 
-
-	mlx = mlx_init();
-	images = set_up_images(mlx);
-	mlx_win = mlx_new_window(mlx, 800, 600, "Hello world!");
-	mlx_put_image_to_window(mlx, mlx_win, images[0].imgptr, 10, 10);
-	mlx_hook(mlx_win, 17, 0, close_window, NULL);
-	mlx_loop(mlx);
+	game = malloc(sizeof(t_game));
+	game->mlx = mlx_init();
+	game->images = set_up_images(game->mlx);
+	game->mlx_win = mlx_new_window(game->mlx, 1024, 768, "SO_LONG");
+	paint(game->mlx, game->mlx_win, game->images);
+	mlx_hook(game->mlx_win, 17, 0, close_window, game);
+	mlx_hook(game->mlx_win, 2, 1L << 0, handle_key, game);
+	mlx_loop(game->mlx);
 	return (0);
 }
