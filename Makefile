@@ -1,8 +1,8 @@
 #Config
-CC = cc
+CC = gcc
 TARGET = SO_LONG
-CFLAGS = -Wall -Wextra 
-LDFLAGS = -L$(LIBFT_DIR) -L$(MLX_DIR)
+CFLAGS = -Wall -Wextra -g -O1 #-fsanitize=address
+
 
 # Directory
 SRC_DIR = src
@@ -15,7 +15,6 @@ LIBFT_DIR = $(LIB_DIR)/libft
 MLX_DIR = $(LIB_DIR)/mlx
 LIBFT = $(LIBFT_DIR)/libft.a
 MLX = $(MLX_DIR)/libmlx.a
-LIBS = -lft -lmlx -lmlx_Linux -lX11 -lXext -lm
 
 # Source + obj
 SRCS = $(wildcard $(SRC_DIR)/*.c)
@@ -24,11 +23,11 @@ OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 all: $(TARGET)
 
 $(TARGET): $(LIBFT) $(MLX) $(OBJS)
-	$(CC) $(OBJS) -o $(TARGET) $(LDFLAGS) $(LIBS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(TARGET) $(LIBFT) $(MLX) -lX11 -lXext -lm
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
