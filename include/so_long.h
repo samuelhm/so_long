@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 22:09:53 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/17 17:00:45 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/17 21:58:15 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,10 @@ typedef struct s_game
 
 
 int		close_window(t_game *game);
-t_img	*set_up_images(void *mlx_ptr);
+t_img	*set_up_images(void *mlx_ptr, int w, int h);
 void	unload_images(t_game *game);
 void	paint(void *mlx, void *mlx_win, t_img *images);
 int		handle_key(int keycode, t_game *game);
+int		init(t_game *game);
 
 #endif

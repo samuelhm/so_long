@@ -1,7 +1,7 @@
 #Config
 CC = gcc
 TARGET = SO_LONG
-CFLAGS = -Wall -Wextra -g -O1 #-fsanitize=address
+CFLAGS = -Wall -Wextra -g -O1 -fsanitize=address
 
 
 # Directory

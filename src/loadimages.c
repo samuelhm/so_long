@@ -6,17 +6,15 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 10:28:11 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/17 17:00:47 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/17 21:58:15 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-t_img	*set_up_images(void *mlx_ptr)
+t_img	*set_up_images(void *mlx_ptr, int w, int h)
 {
 	t_img	*images;
-	int		w;
-	int		h;
 
 	w = GAME_W;
 	h = GAME_H;
@@ -32,13 +30,22 @@ t_img	*set_up_images(void *mlx_ptr)
 	return (images);
 }
 
-void unload_images(t_game *game)
+void	unload_images(t_game *game)
 {
-	mlx_destroy_image(game->mlx, game->images->empty);
-	mlx_destroy_image(game->mlx, game->images->wall1);
-	mlx_destroy_image(game->mlx, game->images->wall2);
-	mlx_destroy_image(game->mlx, game->images->wall3);
-	mlx_destroy_image(game->mlx, game->images->hero);
-	mlx_destroy_image(game->mlx, game->images->exit);
-	mlx_destroy_image(game->mlx, game->images->item);
+	if (game->images->empty)
+		mlx_destroy_image(game->mlx, game->images->empty);
+	if (game->images->wall1)
+		mlx_destroy_image(game->mlx, game->images->wall1);
+	if (game->images->wall2)
+		mlx_destroy_image(game->mlx, game->images->wall2);
+	if (game->images->wall3)
+		mlx_destroy_image(game->mlx, game->images->wall3);
+	if (game->images->hero)
+		mlx_destroy_image(game->mlx, game->images->hero);
+	if (game->images->exit)
+		mlx_destroy_image(game->mlx, game->images->exit);
+	if (game->images->item)
+		mlx_destroy_image(game->mlx, game->images->item);
+	if (game->images)
+		free(game->images);
 }

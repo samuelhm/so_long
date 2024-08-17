@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/16 22:09:45 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/17 21:26:58 by shurtado         ###   ########.fr       */
+/*   Created: 2024/08/17 21:03:21 by shurtado          #+#    #+#             */
+/*   Updated: 2024/08/17 21:58:12 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-
-
-int	main(void)
+int	init(t_game *game)
 {
-	t_game	*game;
-
-	game = malloc(sizeof(t_game));
-	if (game == NULL)
-		return (1);
-	if (!init(game))
-		close_window(game);
-	paint(game->mlx, game->mlx_win, game->images);
-	mlx_hook(game->mlx_win, 17, 0, close_window, game);
-	mlx_hook(game->mlx_win, 2, 1L << 0, handle_key, game);
-	mlx_loop(game->mlx);
-	return (0);
+	game->mlx = mlx_init();
+	if (game->mlx == NULL)
+		return (0);
+	game->images = set_up_images(game->mlx, GAME_W, GAME_H);
+	if (game->images == NULL)
+		return (0);
+	game->mlx_win = mlx_new_window(game->mlx, 1024, 768, "SO_LONG");
+	if (game->mlx_win == NULL)
+		return (0);
+	return (1);
 }
