@@ -6,25 +6,25 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 15:23:29 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/18 18:19:30 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/19 01:19:42 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-void	paint(void *mlx, void *mlx_win, t_img *images)
+void	paint(t_game *game)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 0;
-	while (i < 640)
+	while (i < game->win_W)
 	{
 		j = 0;
-		while (j < 640)
+		while (j < game->win_H)
 		{
-			mlx_put_image_to_window(mlx, mlx_win, images->empty, i, j);
+			mlx_put_image_to_window(game->mlx, game->mlx_win, game->images->wall1, i, j);
 			j += 32;
 		}
 		i += 32;

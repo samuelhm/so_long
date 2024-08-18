@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 21:03:21 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/19 00:31:07 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/19 01:21:42 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,22 @@ static int	init_map(t_game *game, const char *mapname);
 
 int	init(t_game *game, char *mapname)
 {
+
+	if (!init_map(game, mapname))
+		return (0);
+	game->win_W = ft_strlen(game->map[0]) * GAME_W;
+	game->win_H = 0;
+	while (game->map[game->win_H])
+		game->win_H++;
+	game->win_H *= GAME_H;
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		return (0);
 	game->images = set_up_images(game->mlx, GAME_W, GAME_H);
 	if (!game->images)
 		return (0);
-	game->mlx_win = mlx_new_window(game->mlx, 1024, 768, "SO_LONG");
+	game->mlx_win = mlx_new_window(game->mlx, game->win_W, game->win_H, "SO_LONG");
 	if (!game->mlx_win)
-		return (0);
-	if (!init_map(game, mapname))
 		return (0);
 	return (1);
 }

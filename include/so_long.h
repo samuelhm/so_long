@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 22:09:53 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/19 00:30:15 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/19 01:18:02 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct s_game
 	void	*mlx_win;
 	t_img	*images;
 	char	**map;
+	int		win_W;
+	int		win_H;
 }	t_game;
 
 typedef struct s_pos
@@ -51,7 +53,7 @@ int		close_window(t_game *game);
 int		close_window_message(t_game *game, const char *error);
 t_img	*set_up_images(void *mlx_ptr, int w, int h);
 void	unload_images(t_game *game);
-void	paint(void *mlx, void *mlx_win, t_img *images);
+void	paint(t_game *game);
 int		handle_key(int keycode, t_game *game);
 int		init(t_game *game, char *mapname);
 char	**map_is_ok(char *path);
