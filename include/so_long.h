@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 22:09:53 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/19 00:19:01 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/19 00:30:15 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	unload_images(t_game *game);
 void	paint(void *mlx, void *mlx_win, t_img *images);
 int		handle_key(int keycode, t_game *game);
 int		init(t_game *game, char *mapname);
-int		map_is_ok(char *path);
+char	**map_is_ok(char *path);
 int		map_is_reachable(char *full_map);
 
 #endif

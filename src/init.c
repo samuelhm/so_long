@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 21:03:21 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/18 23:52:11 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/19 00:31:07 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ static int	init_map(t_game *game, const char *mapname)
 		close_window_message(game, ERR_FILE);
 	}
 	close(map_file);
-	if (!map_is_ok(path))
+	game->map = map_is_ok(path);
+	if (!game->map)
 	{
 		free(path);
 		return (0);

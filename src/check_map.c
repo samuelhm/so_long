@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 23:09:52 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/19 00:21:40 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/19 00:33:39 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ static int	map_is_rect_fenced(char *full_map, int row, int col);
 static int	result_ok(char *mapline, int col, int row, char **map);
 static int	map_got_all_items(char *full_map);
 
-int	map_is_ok(char *path)
+char	**map_is_ok(char *path)
 {
 	int		map_checks[3];
 	int		map_file;
 	char	*full_map;
+	char	**result;
 
 	map_file = open(path, 0);
 	full_map = ft_strfill_fd(map_file);
@@ -29,9 +30,15 @@ int	map_is_ok(char *path)
 	map_checks[0] = map_is_rect_fenced(full_map, 1, 0);
 	map_checks[1] = map_got_all_items(full_map);
 	map_checks[2] = map_is_reachable(full_map);
-	free(full_map);
 	ft_printf("Resultados:\nmap_checks[0]= %d\nmap_checks[1]= %d\nmap_checks[2]= %d\n",map_checks[0],map_checks[1],map_checks[2]);
-	return ((map_checks[0] + map_checks[1] + map_checks[2]) == 3);
+	if ((map_checks[0] + map_checks[1] + map_checks[2]) == 3)
+	{
+		result = ft_split(full_map, '\n');
+		free(full_map);
+		return (result);
+	}
+	free(full_map);
+	return (NULL);
 }
 
 static int	map_is_rect_fenced(char *full_map, int row, int col)
