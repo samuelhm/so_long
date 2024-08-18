@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key.c                                              :+:      :+:    :+:   */
+/*   reachable.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/17 16:58:56 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/17 22:59:14 by shurtado         ###   ########.fr       */
+/*   Created: 2024/08/18 18:34:47 by shurtado          #+#    #+#             */
+/*   Updated: 2024/08/18 18:42:45 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-int	handle_key(int keycode, t_game *game)
+int	map_is_reachable(int map_file)
 {
-	if (keycode == KEY_ESC)
-		close_window(game);
-	if (keycode == KEY_DOWN)
-		close_window(game);
-	if (keycode == KEY_UP)
-		close_window(game);
-	if (keycode == KEY_LEFT)
-		close_window(game);
-	if (keycode == KEY_RIGHT)
-		close_window(game);
 	return (0);
 }

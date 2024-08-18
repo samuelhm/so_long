@@ -6,13 +6,13 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 15:23:29 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/17 15:30:34 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/18 18:19:30 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-void paint(void *mlx, void *mlx_win, t_img *images)
+void	paint(void *mlx, void *mlx_win, t_img *images)
 {
 	int	i;
 	int	j;

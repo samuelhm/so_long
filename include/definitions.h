@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 16:14:24 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/17 17:09:50 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/18 17:08:14 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #  define GAME_H 32
 # endif
 
-//Keys (from keysym X11)
+// Keys (from keysym X11)
 # ifndef KEY_ESC
 #  define KEY_ESC 0xff1b
 # endif
@@ -37,5 +37,10 @@
 # ifndef KEY_DOWN
 #  define KEY_DOWN 0x73
 # endif
+
+// Error Messages
+# define ERR_PATH "ERROR\n Error inesperado de memoria (path).\n"
+# define ERR_FILE "ERROR\nCannot Open Mapfile, Please check.\n"
+# define ERR_MAP "ERROR\nIntroduce un solo argumento \"mapname\"\n"
 
 #endif
