@@ -6,37 +6,37 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 19:49:01 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/18 20:15:52 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/18 21:17:41 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 #include "../include/map_checks.h"
 
-int	set_player_position_ok(char **map, t_pos pos)
+int	set_player_position_ok(char **map, t_pos *pos)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 
-	while (i < pos.rows)
+	while (i < pos->rows)
 	{
 		j = 0;
-		while (j < pos.cols)
+		while (j < pos->cols)
 		{
 			if (map[i][j] == 'P')
 			{
-				pos.x = i;
-				pos.y = j;
+				pos->x = i;
+				pos->y = j;
 			}
 			j++;
 		}
 		i++;
 	}
-	if (pos.x == -1 || pos.y == -1)
+	if (pos->x == -1 || pos->y == -1)
 	{
-		destroy_map(map);
+		ft_free_2d_array((void **)map);
 		return (0);
 	}
 	return (1);
@@ -53,7 +53,7 @@ int	is_valid_move(char **map, t_pos positions, int **visited)
 	return (!visited[positions.x][positions.y]);
 }
 
-void	dfs(char **map, t_pos pos, int **visited)
+void	dfs(char **map, t_pos *pos, int **visited)
 {
 	int		dx[4];
 	int		dy[4];
@@ -62,22 +62,22 @@ void	dfs(char **map, t_pos pos, int **visited)
 
 	i = 0;
 	init_moves(dx, dy);
-	visited[pos.x][pos.y] = 1;
+	visited[pos->x][pos->y] = 1;
 	while (i < 4)
 	{
-		newpos = pos;
+		newpos = *pos;
 		newpos.x += dx[i];
 		newpos.y += dy[i];
 		if (is_valid_move(map, newpos, visited))
-			dfs(map, newpos, visited);
+			dfs(map, &newpos, visited);
 		i++;
 	}
 }
 
 int	check_reachable(char **map, t_pos pos, int **visit)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < pos.rows)
@@ -92,4 +92,16 @@ int	check_reachable(char **map, t_pos pos, int **visit)
 		i++;
 	}
 	return (1);
+}
+
+void	init_moves(int *dx, int *dy)
+{
+	dx[0] = -1;
+	dx[1] = 1;
+	dx[2] = 0;
+	dx[3] = 0;
+	dy[0] = 0;
+	dy[1] = 0;
+	dy[2] = -1;
+	dy[3] = 1;
 }

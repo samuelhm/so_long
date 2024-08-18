@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 22:09:53 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/18 20:15:52 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/19 00:19:01 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ typedef struct s_pos
 	int	cols;
 }	t_pos;
 
-void	close_window(t_game *game);
-void	close_window_message(t_game *game, const char *error);
+int		close_window(t_game *game);
+int		close_window_message(t_game *game, const char *error);
 t_img	*set_up_images(void *mlx_ptr, int w, int h);
 void	unload_images(t_game *game);
 void	paint(void *mlx, void *mlx_win, t_img *images);
 int		handle_key(int keycode, t_game *game);
 int		init(t_game *game, char *mapname);
 int		map_is_ok(char *path);
-int		map_is_reachable(int map_file);
+int		map_is_reachable(char *full_map);
 
 #endif

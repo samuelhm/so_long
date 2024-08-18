@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 21:03:21 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/18 17:31:30 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/18 23:52:11 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	init(t_game *game, char *mapname)
 		return (0);
 	game->mlx_win = mlx_new_window(game->mlx, 1024, 768, "SO_LONG");
 	if (!game->mlx_win)
+		return (0);
+	if (!init_map(game, mapname))
 		return (0);
 	return (1);
 }

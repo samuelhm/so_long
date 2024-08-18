@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 16:14:24 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/18 17:08:14 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/19 00:03:20 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@
 # define ERR_PATH "ERROR\n Error inesperado de memoria (path).\n"
 # define ERR_FILE "ERROR\nCannot Open Mapfile, Please check.\n"
 # define ERR_MAP "ERROR\nIntroduce un solo argumento \"mapname\"\n"
+# define ERR_INIT "ERROR\nFallo de inicialización!\n"
 
 #endif

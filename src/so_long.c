@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 22:09:45 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/18 18:19:20 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/19 00:16:07 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,16 @@ int	main(int argc, char *argv[])
 {
 	t_game	*game;
 
+	game = malloc(sizeof(t_game));
 	if (argc != 2)
 	{
-		printf(ERR_MAP);
+		close_window_message(game,ERR_MAP);
 		return (0);
 	}
-	game = malloc(sizeof(t_game));
 	if (game == NULL)
 		return (1);
-	init(game, argv[1]);
+	if (!init(game, argv[1]))
+		close_window_message(game, ERR_INIT);
 	paint(game->mlx, game->mlx_win, game->images);
 	mlx_hook(game->mlx_win, 17, 0, close_window, game);
 	mlx_hook(game->mlx_win, 2, 1L << 0, handle_key, game);

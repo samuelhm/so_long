@@ -6,60 +6,59 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 23:09:52 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/18 18:42:45 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/19 00:21:40 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
 static int	map_line_is_ok(const char *s, int line);
-static int	map_is_rect_fenced(int map, int row, int col);
-static int	result_ok(char *mapline, int col, int row);
-static int	map_got_all_items(int map_file);
+static int	map_is_rect_fenced(char *full_map, int row, int col);
+static int	result_ok(char *mapline, int col, int row, char **map);
+static int	map_got_all_items(char *full_map);
 
 int	map_is_ok(char *path)
 {
-	int	map_checks[3];
-	int	map_file;
+	int		map_checks[3];
+	int		map_file;
+	char	*full_map;
 
 	map_file = open(path, 0);
-	map_checks[0] = (map_is_rect_fenced(map_file, 0, 0));
+	full_map = ft_strfill_fd(map_file);
 	close(map_file);
-	map_file = open(path, 0);
-	map_checks[1] = map_got_all_items(map_file);
-	close(map_file);
-	map_file = open(path, 0);
-	map_checks[2] = map_is_reachable(map_file);
-	close(map_file);
+	map_checks[0] = map_is_rect_fenced(full_map, 1, 0);
+	map_checks[1] = map_got_all_items(full_map);
+	map_checks[2] = map_is_reachable(full_map);
+	free(full_map);
+	ft_printf("Resultados:\nmap_checks[0]= %d\nmap_checks[1]= %d\nmap_checks[2]= %d\n",map_checks[0],map_checks[1],map_checks[2]);
 	return ((map_checks[0] + map_checks[1] + map_checks[2]) == 3);
 }
 
-static int	map_is_rect_fenced(int map, int row, int col)
+static int	map_is_rect_fenced(char *full_map, int row, int col)
 {
-	char	*mapline;
-	char	*nextline;
+	char	**map;
+	int		i;
 
-	mapline = get_next_line(map);
-	if (!mapline)
+	map = ft_split(full_map, '\n');
+	if (!map[0])
 		return (0);
-	col = ft_strlen(mapline);
-	row++;
-	if (!map_line_is_ok(mapline, 0))
-		return (0);
-	nextline = get_next_line(map);
-	while (nextline)
+	col = ft_strlen(map[0]);
+	if (!map_line_is_ok(map[0], 0))
 	{
-		free (mapline);
-		mapline = nextline;
-		nextline = get_next_line(map);
-		if (col != ft_strlen(mapline) || !map_line_is_ok(mapline, 1))
+		return (0);
+	}
+	i = 1;
+	while (map[i])
+	{
+		if (col != ft_strlen(map[i]) || !map_line_is_ok(map[i], 1))
 		{
-			free(mapline);
+			ft_free_2d_array((void **)map);
 			return (0);
 		}
 		row++;
+		i++;
 	}
-	return (result_ok(mapline, col, row));
+	return (result_ok(map[i - 1], col, row, map));
 }
 
 static int	map_line_is_ok(const char *s, int line)
@@ -83,27 +82,31 @@ static int	map_line_is_ok(const char *s, int line)
 		if (s[0] != '1')
 			return (0);
 		while (s[i])
+		{
+			if (s[i] != '0' && s[i] != '1' && s[i] != 'C'
+				&& s[i] != 'E' && s[i] != 'P')
+				return (0);
 			i++;
+		}
 		if (s[i - 1] != '1')
 			return (0);
 	}
 	return (1);
 }
 
-static int	result_ok(char *mapline, int col, int row)
+static int	result_ok(char *mapline, int col, int row, char **map)
 {
 	if (col > 2 && row > 2 && map_line_is_ok(mapline, 2))
 	{
-		free (mapline);
+		ft_free_2d_array((void **)map);
 		return (1);
 	}
-	free (mapline);
+	ft_free_2d_array((void **)map);
 	return (0);
 }
 
-static int	map_got_all_items(int map_file)
+static int	map_got_all_items(char *full_map)
 {
-	char	*full_map;
 	int		i;
 	int		player;
 	int		items;
@@ -113,7 +116,6 @@ static int	map_got_all_items(int map_file)
 	player = 0;
 	items = 0;
 	exit = 0;
-	full_map = ft_strfill_fd(map_file);
 	while (full_map[i])
 	{
 		if (full_map[i] == 'P')
@@ -124,7 +126,6 @@ static int	map_got_all_items(int map_file)
 			items++;
 		i++;
 	}
-	free(full_map);
 	if (player == 1 && exit == 1 && items > 0)
 		return (1);
 	return (0);
