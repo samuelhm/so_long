@@ -1,5 +1,6 @@
 *.swp
 .vscode
+*.vscode
 # Prerequisites
 *.d
 
