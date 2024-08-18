@@ -1,6 +1,7 @@
+# Personal Excludes
 *.swp
-.vscode
 .vscode/
+*.tmp
 # Prerequisites
 *.d
 
