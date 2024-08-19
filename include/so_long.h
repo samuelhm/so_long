@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 22:09:53 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/19 01:18:02 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/19 02:35:39 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ typedef struct s_game
 	void	*mlx_win;
 	t_img	*images;
 	char	**map;
-	int		win_W;
-	int		win_H;
+	int		player_x;
+	int		player_y;
 }	t_game;
 
 typedef struct s_pos
@@ -58,5 +58,6 @@ int		handle_key(int keycode, t_game *game);
 int		init(t_game *game, char *mapname);
 char	**map_is_ok(char *path);
 int		map_is_reachable(char *full_map);
+void	get_position(t_game *game);
 
 #endif

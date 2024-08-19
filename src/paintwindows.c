@@ -6,11 +6,30 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 15:23:29 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/19 01:19:42 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/19 01:39:02 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
+
+static void	pblock(t_game *game, int x, int y, char image)
+{
+	void	*mlx;
+	void	*win;
+
+	mlx = game->mlx;
+	win = game->mlx_win;
+	if (image == '0')
+		mlx_put_image_to_window(mlx, win, game->images->empty, x ,y);
+	else if (image == '1')
+		mlx_put_image_to_window(mlx, win, game->images->wall1, x ,y);
+	else if (image == 'C')
+		mlx_put_image_to_window(mlx, win, game->images->item, x ,y);
+	else if (image == 'E')
+		mlx_put_image_to_window(mlx, win, game->images->exit, x ,y);
+	else if (image == 'P')
+		mlx_put_image_to_window(mlx, win, game->images->hero, x ,y);
+}
 
 void	paint(t_game *game)
 {
@@ -18,15 +37,14 @@ void	paint(t_game *game)
 	int	j;
 
 	i = 0;
-	j = 0;
-	while (i < game->win_W)
+	while (game->map[i])
 	{
 		j = 0;
-		while (j < game->win_H)
+		while (game->map[i][j])
 		{
-			mlx_put_image_to_window(game->mlx, game->mlx_win, game->images->wall1, i, j);
-			j += 32;
+			pblock(game, j * GAME_W, i * GAME_H, game->map[i][j]);
+			j++;
 		}
-		i += 32;
+		i++;
 	}
 }
