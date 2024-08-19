@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 19:49:01 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/19 14:47:19 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/19 15:21:48 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ int	set_player_position_ok(char **map, t_pos *pos)
 	return (1);
 }
 
-int	is_valid_move(char **map, t_pos positions, int **visited)
+int	is_valid_move(char **map, t_pos p, int **visited)
 {
-	if (!(positions.x >= 0 && positions.x < positions.rows))
+	if (!(p.x >= 0 && p.x < p.rows))
 		return (0);
-	if (!(positions.y >= 0 && positions.y < positions.cols))
+	if (!(p.y >= 0 && p.y < p.cols))
 		return (0);
-	if (map[positions.x][positions.y] == '1' )
+	if (map[p.x][p.y] == '1')
 		return (0);
-	return (!visited[positions.x][positions.y]);
+	return (!visited[p.x][p.y]);
 }
 
 void	dfs(char **map, t_pos *pos, int **visited)

@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 22:09:45 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/19 14:47:53 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/19 15:27:41 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,5 @@ static void	init_tgame(t_game *game)
 	game->win_h = 0;
 	game->win_w = 0;
 	game->moves = 0;
+	game->items = 0;
 }

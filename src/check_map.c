@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 23:09:52 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/19 14:49:17 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/19 15:35:22 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	map_is_rect_fenced(char *full_map, int row, int col);
 static int	result_ok(char *mapline, int col, int row, char **map);
 static int	map_got_all_items(char *full_map);
 
-char	**map_is_ok(char *path)
+char	**map_is_ok(char *path,int *items)
 {
 	int		map_checks[3];
 	int		map_file;
@@ -29,8 +29,9 @@ char	**map_is_ok(char *path)
 	close(map_file);
 	map_checks[0] = map_is_rect_fenced(full_map, 1, 0);
 	map_checks[1] = map_got_all_items(full_map);
+	*items = map_checks[1];
 	map_checks[2] = map_is_reachable(full_map);
-	if ((map_checks[0] + map_checks[1] + map_checks[2]) == 3)
+	if ((map_checks[0] + map_checks[2] + (map_checks[1] > 0)) == 3)
 	{
 		result = ft_split(full_map, '\n');
 		free(full_map);
@@ -128,6 +129,6 @@ static int	map_got_all_items(char *full_map)
 		i++;
 	}
 	if (player == 1 && exit == 1 && items > 0)
-		return (1);
+		return (items);
 	return (0);
 }
