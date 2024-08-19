@@ -1,7 +1,9 @@
 #Config
 CC = cc
 TARGET = SO_LONG
-CFLAGS = -Wall -Wextra -Werror -g -O0 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+LDFLAGS = -L/usr/local/lib -lmlx -lX11 -lXext -lm
+INCLUDES = -I/usr/local/include -I$(INC_DIR)
 
 # Directory
 SRC_DIR = src
@@ -11,9 +13,7 @@ LIB_DIR = lib
 
 # Librarys
 LIBFT_DIR = $(LIB_DIR)/libft
-MLX_DIR = $(LIB_DIR)/mlx
 LIBFT = $(LIBFT_DIR)/libft.a
-MLX = $(MLX_DIR)/libmlx.a
 
 # Source + obj
 SRCS = $(wildcard $(SRC_DIR)/*.c)
@@ -22,8 +22,7 @@ OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 all: $(TARGET)
 
 $(TARGET): $(LIBFT) $(MLX) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(TARGET) $(LIBFT) $(MLX) -lX11 -lXext -lm
-
+	$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(TARGET) $(LIBFT)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
@@ -31,17 +30,12 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
-$(MLX):
-	$(MAKE) -C $(MLX_DIR)
-
 clean:
 	rm -rf $(OBJ_DIR)
 	$(MAKE) -C $(LIBFT_DIR) clean
-	$(MAKE) -C $(MLX_DIR) clean
 
-fclean:
+fclean: clean
 	rm -rf $(TARGET)
 	$(MAKE) -C $(LIBFT_DIR) fclean
-	$(MAKE) -C $(MLX_DIR) clean
 
-.PHONY: all clean fclean $(LIBFT) $(MLX)
+.PHONY: all clean fclean $(LIBFT)
