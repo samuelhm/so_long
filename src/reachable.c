@@ -6,12 +6,14 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 18:34:47 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/18 23:52:11 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/19 22:06:59 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 #include "../include/map_checks.h"
+
+static void	free_visited(int **visited, int rows);
 
 static void	init_pos(t_pos *pos)
 {
@@ -56,11 +58,48 @@ int	map_is_reachable(char *full_map)
 	pos.cols = ft_strlen(map[0]);
 	if (!set_player_position_ok(map, &pos))
 		return (0);
+	ft_printf("pos.rows: %d\n", pos.rows);
 	visited = malloc(sizeof(int *) * pos.rows);
 	init_visit(visited, pos);
 	dfs(map, &pos, visited);
 	result = check_reachable(map, pos, visited);
-	ft_free_2d_array((void **)map);
-	ft_free_2d_array((void **)visited);
+	free_map(map, pos.rows);
+	free_visited(visited, pos.rows);
 	return (result);
+}
+
+static void	free_visited(int **visited, int rows)
+{
+	int	i;
+
+	if (!visited)
+		return ;
+	i = 0;
+	while (i < rows)
+	{
+		if (visited[i])
+		{
+			free(visited[i]);
+		}
+		i++;
+	}
+	free(visited);
+}
+
+void	free_map(char **map, int rows)
+{
+	int	i;
+
+	if (!map)
+		return ;
+	i = 0;
+	while (i < rows)
+	{
+		if (map[i])
+		{
+			free(map[i]);
+		}
+		i++;
+	}
+	free(map);
 }
