@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 10:12:29 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/19 00:46:21 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:32:06 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	close_window_message(t_game *game, const char *error)
 {
-	unload_images(game);
+	if (game->images)
+		unload_images(game);
 	if (game->map)
 		ft_free_2d_array((void **)game->map);
 	if (game->mlx_win)
@@ -34,7 +35,8 @@ int	close_window_message(t_game *game, const char *error)
 
 int	close_window(t_game *game)
 {
-	unload_images(game);
+	if (game->images)
+		unload_images(game);
 	if (game->map)
 		ft_free_2d_array((void **)game->map);
 	if (game->mlx_win)

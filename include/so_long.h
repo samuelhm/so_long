@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 22:09:53 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/19 14:05:55 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:42:06 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_game
 	int		player_y;
 	int		win_w;
 	int		win_h;
+	int		moves;
 }	t_game;
 
 typedef struct s_pos

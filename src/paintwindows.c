@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 15:23:29 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/19 01:39:02 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:48:44 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ static void	pblock(t_game *game, int x, int y, char image)
 	mlx = game->mlx;
 	win = game->mlx_win;
 	if (image == '0')
-		mlx_put_image_to_window(mlx, win, game->images->empty, x ,y);
+		mlx_put_image_to_window(mlx, win, game->images->empty, x, y);
 	else if (image == '1')
-		mlx_put_image_to_window(mlx, win, game->images->wall1, x ,y);
+		mlx_put_image_to_window(mlx, win, game->images->wall1, x, y);
 	else if (image == 'C')
-		mlx_put_image_to_window(mlx, win, game->images->item, x ,y);
+		mlx_put_image_to_window(mlx, win, game->images->item, x, y);
 	else if (image == 'E')
-		mlx_put_image_to_window(mlx, win, game->images->exit, x ,y);
+		mlx_put_image_to_window(mlx, win, game->images->exit, x, y);
 	else if (image == 'P')
-		mlx_put_image_to_window(mlx, win, game->images->hero, x ,y);
+		mlx_put_image_to_window(mlx, win, game->images->hero, x, y);
 }
 
 void	paint(t_game *game)
