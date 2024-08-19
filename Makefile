@@ -1,7 +1,7 @@
 #Config
 CC = cc
 TARGET = SO_LONG
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 LDFLAGS = -L/usr/local/lib -lmlx -lX11 -lXext -lm
 INCLUDES = -I/usr/local/include -I$(INC_DIR)
 
