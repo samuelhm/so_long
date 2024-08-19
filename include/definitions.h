@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 16:14:24 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/19 14:26:56 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:54:08 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,6 @@
 # define ERR_MAP "ERROR\nIntroduce un solo argumento \"mapname\"\n"
 # define ERR_INIT "ERROR\nFallo de inicialización!\n"
 
+//Utils
+# define CLR_LN "\033[2K\r"
 #endif

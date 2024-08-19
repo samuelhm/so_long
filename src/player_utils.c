@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 01:57:50 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/19 02:41:05 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:56:50 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,15 @@ void	get_position(t_game *game)
 		}
 		i++;
 	}
+}
+
+void	print_score(t_game *game)
+{
+	ft_printf(CLR_LN);
+	ft_printf("Moves: %d", game->moves);
+}
+
+void	add_score(t_game *game)
+{
+	game->moves++;
 }

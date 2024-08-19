@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 22:09:53 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/19 14:42:06 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/19 14:56:52 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,7 @@ int		init(t_game *game, char *mapname);
 char	**map_is_ok(char *path);
 int		map_is_reachable(char *full_map);
 void	get_position(t_game *game);
+void	add_score(t_game *game);
+void	print_score(t_game *game);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 16:58:56 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/19 02:39:53 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/19 15:00:29 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ static void	move(t_game *game, int x, int y)
 		return ;
 	if (can_move(game->map[p_x + x][p_y + y]))
 	{
+		add_score(game);
+		print_score(game);
+		if (game->map[p_x + x][p_y + y] == 'E')
+			close_window_message(game, "\nYou exit!! congrats\n");
 		game->map[p_x][p_y] = '0';
 		game->map[p_x + x][p_y + y] = 'P';
 		game->player_x += x;
