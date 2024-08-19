@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 16:58:56 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/19 15:54:35 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/19 16:00:23 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	handle_key(int keycode, t_game *game)
 
 static void	move_to(t_game *game, int key)
 {
+	get_position(game);
 	if (key == KEY_LEFT)
 		move(game, 0, -1, game->player_x);
 	else if (key == KEY_RIGHT)
@@ -49,7 +50,6 @@ static void	move(t_game *game, int x, int y, int p_x)
 	int	p_y;
 
 	p_y = game->player_y;
-	get_position(game);
 	if (!game->map[p_x + x][p_y + y])
 		return ;
 	if (can_move(game->map[p_x + x][p_y + y]))
@@ -75,7 +75,7 @@ static void	move(t_game *game, int x, int y, int p_x)
 static void	do_move(t_game *game, int x, int y)
 {
 	int	p_x;
-	int p_y;
+	int	p_y;
 
 	p_x = game->player_x;
 	p_y = game->player_y;
@@ -85,6 +85,7 @@ static void	do_move(t_game *game, int x, int y)
 	game->player_y += y;
 	paint(game);
 }
+
 static int	can_move(char box)
 {
 	return (box == '0' || box == 'C' || box == 'E');
