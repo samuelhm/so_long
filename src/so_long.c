@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 22:09:45 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/19 22:43:11 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:27:01 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(int argc, char *argv[])
 		return (1);
 	if (!init(game, argv[1]))
 	{
-		ft_printf("Cerrando init 0\n");
 		close_window_message(game, ERR_INIT);
 	}
 	mlx_hook(game->mlx_win, 17, 0, close_window, game);
