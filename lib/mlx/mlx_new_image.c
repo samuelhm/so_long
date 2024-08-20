@@ -1,9 +1,9 @@
 /*
 ** mlx_new_image.c for MiniLibX in raytraceur
-** 
+**
 ** Made by Charlie Root
 ** Login   <ol@epitech.net>
-** 
+**
 ** Started on  Mon Aug 14 15:29:14 2000 Charlie Root
 ** Last update Wed May 25 16:46:31 2011 Olivier Crouzet
 */
@@ -89,13 +89,13 @@ void	*mlx_int_new_xshm_image(t_xvar *xvar,int width,int height,int format)
     {
       img->pix = XShmCreatePixmap(xvar->display,xvar->root,img->shm.shmaddr,
 				  &(img->shm),width,height,xvar->depth);
-      img->type = MLX_TYPE_SHM_PIXMAP;
+      img->type = LIBMLX_TYPE_SHM_PIXMAP;
     }
   else
     {
       img->pix = XCreatePixmap(xvar->display,xvar->root,
 			       width,height,xvar->depth);
-      img->type = MLX_TYPE_SHM;
+      img->type = LIBMLX_TYPE_SHM;
     }
   if (xvar->do_flush)
     XFlush(xvar->display);
@@ -131,7 +131,7 @@ void	*mlx_int_new_image(t_xvar *xvar,int width, int height,int format)
   img->height = height;
   img->pix = XCreatePixmap(xvar->display,xvar->root,width,height,xvar->depth);
   img->format = format;
-  img->type = MLX_TYPE_XIMAGE;
+  img->type = LIBMLX_TYPE_XIMAGE;
   if (xvar->do_flush)
     XFlush(xvar->display);
   return (img);

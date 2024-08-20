@@ -1,9 +1,9 @@
 /*
-** mlx_destroy_image.c for MinilibX in 
-** 
+** mlx_destroy_image.c for MinilibX in
+**
 ** Made by Charlie Root
 ** Login   <ol@epitech.net>
-** 
+**
 ** Started on  Tue Mar 12 10:25:15 2002 Charlie Root
 ** Last update Tue May 15 16:45:54 2007 Olivier Crouzet
 */
@@ -14,8 +14,8 @@
 
 int	mlx_destroy_image(t_xvar *xvar, t_img *img)
 {
-  if (img->type == MLX_TYPE_SHM_PIXMAP ||
-      img->type == MLX_TYPE_SHM)
+  if (img->type == LIBMLX_TYPE_SHM_PIXMAP ||
+      img->type == LIBMLX_TYPE_SHM)
     {
       XShmDetach(xvar->display, &(img->shm));
       shmdt(img->shm.shmaddr);

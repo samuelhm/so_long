@@ -1,9 +1,9 @@
 /*
-** mlx_xpm.c for minilibX in 
-** 
+** mlx_xpm.c for minilibX in
+**
 ** Made by Charlie Root
 ** Login   <ol@epitech.net>
-** 
+**
 ** Started on  Fri Dec  8 11:07:24 2000 Charlie Root
 ** Last update Thu Oct  4 16:00:22 2001 Charlie Root
 */
@@ -45,13 +45,13 @@ void		*mlx_int_xpm_f_image(t_xvar *xvar,int *width,int *height,
       XDestroyImage(img1);
       return (im2);
     }
-  if (im2->type==MLX_TYPE_SHM_PIXMAP)
+  if (im2->type==LIBMLX_TYPE_SHM_PIXMAP)
     {
       XFreePixmap(xvar->display,im2->pix);
       im2->pix = XCreatePixmap(xvar->display,xvar->root,
 			       *width,*height,xvar->depth);
     }
-  if (im2->type>MLX_TYPE_XIMAGE)
+  if (im2->type>LIBMLX_TYPE_XIMAGE)
     {
       XShmDetach(xvar->display,&(im2->shm));
       shmdt(im2->data);
@@ -59,7 +59,7 @@ void		*mlx_int_xpm_f_image(t_xvar *xvar,int *width,int *height,
   XDestroyImage(im2->image);
   im2->image = img1;
   im2->data = img1->data;
-  im2->type = MLX_TYPE_XIMAGE;
+  im2->type = LIBMLX_TYPE_XIMAGE;
   im2->size_line = img1->bytes_per_line;
   im2->bpp = img1->bits_per_pixel;
   return (im2);
