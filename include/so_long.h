@@ -6,14 +6,14 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 22:09:53 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/19 22:07:09 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/20 12:56:24 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "mlx.h"
+# include <mlx.h>
 # include "../lib/libft/libft.h"
 # include <math.h>
 # include <stdlib.h>

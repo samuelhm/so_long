@@ -2,8 +2,8 @@
 CC = cc
 TARGET = SO_LONG
 CFLAGS = -Wall -Wextra -Werror
-LDFLAGS = -L/usr/local/lib -lmlx -lX11 -lXext -lm
-INCLUDES = -I/usr/local/include -I$(INC_DIR)
+LDFLAGS = -L$(LIBFT_DIR) -L$(MLX_DIR) -L/usr/lib/X11 -lX11 -lXext -lm
+INCLUDES = -I$(INC_DIR) -I$(MLX_DIR)
 
 # Debug
 #CFLAGS += -g -O1 -fsanitize=address
@@ -16,6 +16,8 @@ LIB_DIR = lib
 # Librarys
 LIBFT_DIR = $(LIB_DIR)/libft
 LIBFT = $(LIBFT_DIR)/libft.a
+MLX_DIR = $(LIB_DIR)/mlx
+MLX = $(MLX_DIR)/libmlx.a
 
 # Source + obj
 SRCS = $(wildcard $(SRC_DIR)/*.c)
@@ -25,8 +27,8 @@ OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 all: $(TARGET)
 
 # Compile Binary
-$(TARGET): $(OBJS) $(LIBFT)
-	@$(CC) $(CFLAGS) $(OBJS) $(LDFLAGS) -o $(TARGET) $(LIBFT) > /dev/null
+$(TARGET): $(OBJS) $(LIBFT) $(MLX)
+	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT) $(MLX) $(LDFLAGS) -o $(TARGET) > /dev/null
 	@echo "\033[0;32mSO_LONG compiled\033[0m"
 
 # -MMD to include header dependences to .d file and run $(OBJ_DIR) if not exist
@@ -43,16 +45,25 @@ $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR) > /dev/null
 	@echo "\033[0;32mlibft.a compiled\033[0m"
 
+# Compile MLX
+$(MLX):
+	@$(MAKE) -C $(MLX_DIR) > /dev/null
+	@echo "\033[0;32mlibmlx.a compiled\033[0m"
+
+# Utils
 clean:
 	@rm -rf $(OBJ_DIR)
 	@echo "\033[0;32mObjects deleted\033[0m"
 	@$(MAKE) -C $(LIBFT_DIR) clean > /dev/null
 	@echo "\033[0;32mlibft/objects deleted\033[0m"
+	@$(MAKE) -C $(MLX_DIR) clean > /dev/null
+	@echo "\033[0;32mmlxobjects deleted\033[0m"
 
 fclean: clean
 	@rm -rf $(TARGET) > /dev/null
 	@echo "\033[0;32mSO_LONG deleted\033[0m"
 	@$(MAKE) -C $(LIBFT_DIR) fclean > /dev/null
+	@$(MAKE) -C $(MLX_DIR) clean > /dev/null
 
 re: fclean all
 
