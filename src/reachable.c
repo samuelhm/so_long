@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 18:34:47 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/19 22:06:59 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:28:03 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	map_is_reachable(char *full_map)
 	pos.cols = ft_strlen(map[0]);
 	if (!set_player_position_ok(map, &pos))
 		return (0);
-	ft_printf("pos.rows: %d\n", pos.rows);
 	visited = malloc(sizeof(int *) * pos.rows);
 	init_visit(visited, pos);
 	dfs(map, &pos, visited);
