@@ -52,14 +52,14 @@ libmlx:
 clean:
 	@rm -rf $(OBJ_DIR)
 	@echo "\033[0;32mObjects deleted\033[0m"
-	@$(MAKE) --silent -C $(LIBFT_DIR) fclean
+	@$(MAKE) --silent -C $(LIBFT_DIR) clean
 	@echo "\033[0;32mlibft deleted\033[0m"
-	@$(MAKE) --silent -C $(LIBMLX_DIR) clean
+	@$(MAKE) --silent -C $(LIBMLX_DIR) clean > /dev/null
 	@echo "\033[0;32mmlx deleted\033[0m"
 
 fclean: clean
 	@rm -rf $(TARGET)
-	$(MAKE) --silent -C $(LIBFT_DIR) fclean
+	@$(MAKE) --silent -C $(LIBFT_DIR) fclean
 	@echo "\033[0;32mso_long binary deleted\033[0m"
 
 re: fclean all
