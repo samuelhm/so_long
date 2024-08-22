@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 22:09:53 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/20 15:49:08 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/22 11:59:35 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	unload_images(t_game *game);
 void	paint(t_game *game);
 int		handle_key(int keycode, t_game *game);
 int		init(t_game *game, char *mapname);
-char	**map_is_ok(char *pathint, int *items);
+char	**map_is_ok(const char *pathint, int *items);
 int		map_is_reachable(char *full_map);
 void	get_position(t_game *game);
 void	add_print_score(t_game *game);

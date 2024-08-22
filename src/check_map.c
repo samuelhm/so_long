@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 23:09:52 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/19 15:59:59 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/22 12:00:10 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	map_is_rect_fenced(char *full_map, int row, int col);
 static int	result_ok(char *mapline, int col, int row, char **map);
 static int	map_got_all_items(char *full_map);
 
-char	**map_is_ok(char *path, int *items)
+char	**map_is_ok(const char *path, int *items)
 {
 	int		map_checks[3];
 	int		map_file;
