@@ -46,7 +46,7 @@ libft:
 	@$(MAKE) --silent --no-print-directory -C $(LIBFT_DIR)
 
 libmlx:
-	@$(MAKE) --silent --no-print-directory -C $(LIBMLX_DIR)
+	@$(MAKE) --silent --no-print-directory -C $(LIBMLX_DIR) > /dev/null
 
 # Utils
 clean:
