@@ -39,8 +39,10 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
+# Lib Rules
 libft:
 	@$(MAKE) --silent --no-print-directory -C $(LIBFT_DIR)
+
 libmlx:
 	@$(MAKE) --silent --no-print-directory -C $(LIBMLX_DIR)
 
