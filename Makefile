@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/08/22 12:22:33 by shurtado          #+#    #+#              #
+#    Updated: 2024/08/22 12:23:08 by shurtado         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 #Config
 CC = cc
 TARGET = so_long
@@ -59,7 +71,7 @@ clean:
 
 fclean: clean
 	@rm -rf $(TARGET)
-	$(MAKE) --silent -C $(LIBFT_DIR) fclean
+	@$(MAKE) --silent -C $(LIBFT_DIR) fclean
 	@echo "\033[0;32mso_long binary deleted\033[0m"
 
 re: fclean all
