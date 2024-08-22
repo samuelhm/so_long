@@ -20,7 +20,9 @@ LIBMLX_DIR = $(LIB_DIR)/mlx
 LIBMLX = $(LIBMLX_DIR)/libmlx.a
 
 # Source + obj
-SRCS = src/check_map.c src/init.c src/key.c src/loadimages.c src/map_utils.c src/paintwindows.c src/player_utils.c src/reachable.c src/so_long.c src/x11_utils.c
+SRCS_FILES = check_map.c init.c key.c loadimages.c map_utils.c paintwindows.c player_utils.c reachable.c so_long.c x11_utils.c
+SRCS = $(addprefix $(SRC_DIR)/,$(SRCS_FILES))
+
 OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 
 # Main entrance
