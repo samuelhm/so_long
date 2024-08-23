@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 23:09:52 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/23 17:07:34 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/23 18:02:23 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ char	**map_is_ok(const char *path, int *items)
 	map_checks[0] = map_is_rect_fenced(full_map, 1, 0);
 	map_checks[1] = map_got_all_items(full_map);
 	*items = map_checks[1];
-	map_checks[2] = map_is_reachable(full_map);
+	if (map_checks[0] && map_checks[1])
+		map_checks[2] = map_is_reachable(full_map);
 	if ((map_checks[0] + map_checks[2] + (map_checks[1] > 0)) == 3)
 	{
 		result = ft_split(full_map, '\n');
