@@ -58,15 +58,15 @@ libft:
 	@$(MAKE) --silent --no-print-directory -C $(LIBFT_DIR)
 
 libmlx:
-	@$(MAKE) --silent --no-print-directory -C $(LIBMLX_DIR)
+	@$(MAKE) --silent --no-print-directory -C $(LIBMLX_DIR) > /dev/null
 
 # Utils
 clean:
 	@rm -rf $(OBJ_DIR)
 	@echo "\033[0;32mObjects deleted\033[0m"
-	@$(MAKE) --silent -C $(LIBFT_DIR) fclean
+	@$(MAKE) --silent -C $(LIBFT_DIR) clean
 	@echo "\033[0;32mlibft deleted\033[0m"
-	@$(MAKE) --silent -C $(LIBMLX_DIR) clean
+	@$(MAKE) --silent -C $(LIBMLX_DIR) clean > /dev/null
 	@echo "\033[0;32mmlx deleted\033[0m"
 
 fclean: clean
