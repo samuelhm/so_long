@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 16:14:24 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/19 14:54:08 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/23 16:35:33 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 # define ERR_MAP2 "ERROR\nMap is not valid\n"
 # define ERR_MAP "ERROR\nIntroduce un solo argumento \"mapname\"\n"
 # define ERR_INIT "ERROR\nFallo de inicialización!\n"
+# define ERR_EXT "ERROR\nEl archivo no tiene la extensión correcta!\n"
 
 //Utils
 # define CLR_LN "\033[2K\r"

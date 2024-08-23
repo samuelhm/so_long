@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 18:34:47 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/20 18:28:03 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/23 17:38:37 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	init_visit(int **visit, t_pos pos)
 int	map_is_reachable(char *full_map)
 {
 	char	**map;
-	int		**visited;
+	int		**visited[2];
 	t_pos	pos;
 	int		result;
 
@@ -58,12 +58,16 @@ int	map_is_reachable(char *full_map)
 	pos.cols = ft_strlen(map[0]);
 	if (!set_player_position_ok(map, &pos))
 		return (0);
-	visited = malloc(sizeof(int *) * pos.rows);
-	init_visit(visited, pos);
-	dfs(map, &pos, visited);
-	result = check_reachable(map, pos, visited);
+	visited[0] = malloc(sizeof(int *) * pos.rows);
+	visited[1] = malloc(sizeof(int *) * pos.rows);
+	init_visit(visited[0], pos);
+	init_visit(visited[1], pos);
+	dfs(map, &pos, visited[0], 0);
+	dfs(map, &pos, visited[1], 1);
+	result = reachable(map, pos, visited[0], 0)
+		&& reachable(map, pos, visited[1], 1);
 	free_map(map, pos.rows);
-	free_visited(visited, pos.rows);
+	free_visited(visited[0], pos.rows);
 	return (result);
 }
 

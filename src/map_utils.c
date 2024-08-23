@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 19:49:01 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/23 16:04:42 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/23 17:37:32 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,20 @@ int	set_player_position_ok(char **map, t_pos *pos)
 	return (1);
 }
 
-int	is_valid_move(char **map, t_pos p, int **visited)
+int	is_valid_move(char **map, t_pos p, int **visited, int mode)
 {
 	if (!(p.x >= 0 && p.x < p.rows))
 		return (0);
 	if (!(p.y >= 0 && p.y < p.cols))
 		return (0);
-	if (map[p.x][p.y] == '1' || map[p.x][p.y] == 'E')
+	if ((map[p.x][p.y] == '1' || map[p.x][p.y] == 'E') && mode == 0)
+		return (0);
+	if (map[p.x][p.y] == '1' && mode == 1)
 		return (0);
 	return (!visited[p.x][p.y]);
 }
 
-void	dfs(char **map, t_pos *pos, int **visited)
+void	dfs(char **map, t_pos *pos, int **visited, int mode)
 {
 	int		dx[4];
 	int		dy[4];
@@ -67,13 +69,13 @@ void	dfs(char **map, t_pos *pos, int **visited)
 		newpos = *pos;
 		newpos.x += dx[i];
 		newpos.y += dy[i];
-		if (is_valid_move(map, newpos, visited))
-			dfs(map, &newpos, visited);
+		if (is_valid_move(map, newpos, visited, mode))
+			dfs(map, &newpos, visited, mode);
 		i++;
 	}
 }
 
-int	check_reachable(char **map, t_pos pos, int **visit)
+int	reachable(char **map, t_pos pos, int **visit, int mode)
 {
 	int	i;
 	int	j;
@@ -84,7 +86,9 @@ int	check_reachable(char **map, t_pos pos, int **visit)
 		j = 0;
 		while (j < pos.cols)
 		{
-			if ((map[i][j] == 'C') && !visit[i][j])
+			if ((map[i][j] == 'C') && !visit[i][j] && mode == 0)
+				return (0);
+			if ((map[i][j] == 'E') && !visit[i][j] && mode == 1)
 				return (0);
 			j++;
 		}

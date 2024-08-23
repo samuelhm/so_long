@@ -6,13 +6,14 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 21:03:21 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/22 11:56:49 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/23 16:54:46 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
 static int	init_map(t_game *game, const char *mapname);
+static int	extension_is_ber(const char *s);
 
 int	init(t_game *game, char *mapname)
 {
@@ -44,6 +45,8 @@ static int	init_map(t_game *game, const char *path)
 
 	if (!path)
 		close_window_message(game, ERR_PATH);
+	if (!extension_is_ber(path))
+		close_window_message(game, ERR_EXT);
 	map_file = open(path, 0);
 	if (map_file == -1)
 		close_window_message(game, ERR_FILE);
@@ -52,4 +55,28 @@ static int	init_map(t_game *game, const char *path)
 	if (!game->map)
 		return (0);
 	return (1);
+}
+
+static int	extension_is_ber(const char *s)
+{
+	char	*ext;
+	int		lens;
+	int		lenext;
+	int		result;
+
+	ext = ft_strdup(".ber");
+	if (!ext || !s)
+		return (0);
+	lenext = ft_strlen(ext);
+	lens = ft_strlen(s);
+	if (lens >= lenext)
+	{
+		result = ft_strncmp (s + (lens - lenext), ext, lenext) == 0;
+	}
+	else
+	{
+		result = 0;
+	}
+	free (ext);
+	return (result);
 }
