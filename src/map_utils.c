@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 19:49:01 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/19 15:21:48 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/23 16:04:42 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	is_valid_move(char **map, t_pos p, int **visited)
 		return (0);
 	if (!(p.y >= 0 && p.y < p.cols))
 		return (0);
-	if (map[p.x][p.y] == '1')
+	if (map[p.x][p.y] == '1' || map[p.x][p.y] == 'E')
 		return (0);
 	return (!visited[p.x][p.y]);
 }
@@ -84,7 +84,7 @@ int	check_reachable(char **map, t_pos pos, int **visit)
 		j = 0;
 		while (j < pos.cols)
 		{
-			if ((map[i][j] == 'C' || map[i][j] == 'E') && !visit[i][j])
+			if ((map[i][j] == 'C') && !visit[i][j])
 				return (0);
 			j++;
 		}

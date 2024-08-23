@@ -6,7 +6,7 @@
 #    By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/22 12:22:33 by shurtado          #+#    #+#              #
-#    Updated: 2024/08/22 12:23:08 by shurtado         ###   ########.fr        #
+#    Updated: 2024/08/23 15:59:35 by shurtado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC = cc
 TARGET = so_long
 CFLAGS = -Wall -Wextra -Werror
 LDFLAGS = -L$(LIBFT_DIR) -L$(LIBMLX_DIR) -L/usr/lib/X11 -lX11 -lXext -lm
-INCLUDES = -I$(INC_DIR) -I$(LIBMLX_DIR)
+INCLUDES = -I$(INC_DIR) -I$(LIBMLX_DIR) -I$(LIBFT_DIR)/include
 
 # Debug
 #CFLAGS += -g -O1 -fsanitize=address
@@ -41,12 +41,14 @@ OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 all: libft libmlx $(TARGET)
 
 # Compile Binary
-$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT) $(LIBMLX) $(LDFLAGS) -o $(TARGET)
+$(TARGET): $(OBJS) $(LIBFT) $(LIBMLX)
+	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT) $(LIBMLX) $(LDFLAGS) -o $(TARGET)
+	@echo "\033[1;36mBinary $@ created\033[0m"
 
-# -MMD to include header dependences to .d file and run $(OBJ_DIR) if not exist
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
-	@$(CC) $(CFLAGS) -I$(INC_DIR) -MMD -c $< -o $@ > /dev/null
+
+# -MMD to include header dependences to .d file and run $(OBJ_DIR) if not exist.make
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c Makefile | $(OBJ_DIR)
+	@$(CC) $(CFLAGS) $(INCLUDES) -MMD -c $< -o $@ > /dev/null
 	@echo "\033[0;32mObject $@ created\033[0m"
 
 # Create obj dir
@@ -62,17 +64,20 @@ libmlx:
 
 # Utils
 clean:
-	@rm -rf $(OBJ_DIR)
-	@echo "\033[0;32mObjects deleted\033[0m"
-	@$(MAKE) --silent -C $(LIBFT_DIR) clean
-	@echo "\033[0;32mlibft deleted\033[0m"
-	@$(MAKE) --silent -C $(LIBMLX_DIR) clean > /dev/null
-	@echo "\033[0;32mmlx deleted\033[0m"
+	@if [ -d "$(OBJ_DIR)" ]; then \
+		rm -rf $(OBJ_DIR); \
+		echo "\033[1;31mObjects deleted\033[0m"; \
+	fi
+	@$(MAKE) --silent --no-print-directory -C $(LIBFT_DIR) fclean
+	@$(MAKE) --silent --no-print-directory -C $(LIBMLX_DIR) clean > /dev/null
+	@echo "\033[1;33mmlx clean instruction sent\033[0m"
 
 fclean: clean
-	@rm -rf $(TARGET)
-	@$(MAKE) --silent -C $(LIBFT_DIR) fclean
-	@echo "\033[0;32mso_long binary deleted\033[0m"
+	@if [ -f "$(TARGET)" ]; then \
+		rm -f $(TARGET); \
+		echo "\033[1;31m$(TARGET) deleted\033[0m"; \
+	fi
+
 
 re: fclean all
 

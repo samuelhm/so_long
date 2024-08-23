@@ -6,11 +6,11 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/16 22:09:45 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/20 18:27:35 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/23 15:24:04 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "so_long.h"
 
 static void	init_tgame(t_game *game);
 
