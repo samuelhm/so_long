@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 23:09:52 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/23 18:02:23 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/28 22:30:47 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ char	**map_is_ok(const char *path, int *items)
 	char	*full_map;
 	char	**result;
 
+	result = NULL;
+	init_map_checks(map_checks);
 	map_file = open(path, 0);
 	if (map_file == -1)
 		return (0);
@@ -37,13 +39,9 @@ char	**map_is_ok(const char *path, int *items)
 	if (map_checks[0] && map_checks[1])
 		map_checks[2] = map_is_reachable(full_map);
 	if ((map_checks[0] + map_checks[2] + (map_checks[1] > 0)) == 3)
-	{
 		result = ft_split(full_map, '\n');
-		free(full_map);
-		return (result);
-	}
 	free(full_map);
-	return (NULL);
+	return (result);
 }
 
 static int	map_is_rect_fenced(char *full_map, int row, int col)
@@ -52,15 +50,14 @@ static int	map_is_rect_fenced(char *full_map, int row, int col)
 	int		i;
 
 	map = ft_split(full_map, '\n');
-	if (!map[0])
-		return (0);
-	col = ft_strlen(map[0]);
-	if (!map_line_is_ok(map[0], 0, 0))
+	if (!map[0] || !map_line_is_ok(map[0], 0, 0))
 	{
+		ft_free_2d_array((void **)map);
 		return (0);
 	}
-	i = 1;
-	while (map[i])
+	col = ft_strlen(map[0]);
+	i = 0;
+	while (map[++i])
 	{
 		if (col != ft_strlen(map[i]) || !map_line_is_ok(map[i], 1, 0))
 		{
@@ -68,7 +65,6 @@ static int	map_is_rect_fenced(char *full_map, int row, int col)
 			return (0);
 		}
 		row++;
-		i++;
 	}
 	return (result_ok(map[i - 1], col, row, map));
 }

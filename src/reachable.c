@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 18:34:47 by shurtado          #+#    #+#             */
-/*   Updated: 2024/08/23 17:38:37 by shurtado         ###   ########.fr       */
+/*   Updated: 2024/08/28 22:51:03 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,15 @@ static void	init_pos(t_pos *pos)
 	pos->y = -1;
 }
 
-static void	init_visit(int **visit, t_pos pos)
+static void	init_visit(int ***visit, t_pos pos)
 {
 	int	i;
-	int	j;
 
 	i = 0;
 	while (i < pos.rows)
 	{
-		j = 0;
-		visit[i] = malloc(sizeof(int) * pos.cols);
-		while (j < pos.cols)
-		{
-			visit[i][j] = 0;
-			j++;
-		}
+		visit[0][i] = ft_calloc(sizeof(int), pos.cols);
+		visit[1][i] = ft_calloc(sizeof(int), pos.cols);
 		i++;
 	}
 }
@@ -58,16 +52,16 @@ int	map_is_reachable(char *full_map)
 	pos.cols = ft_strlen(map[0]);
 	if (!set_player_position_ok(map, &pos))
 		return (0);
-	visited[0] = malloc(sizeof(int *) * pos.rows);
-	visited[1] = malloc(sizeof(int *) * pos.rows);
-	init_visit(visited[0], pos);
-	init_visit(visited[1], pos);
+	visited[0] = ft_calloc(sizeof(int *), pos.rows);
+	visited[1] = ft_calloc(sizeof(int *), pos.rows);
+	init_visit(visited, pos);
 	dfs(map, &pos, visited[0], 0);
 	dfs(map, &pos, visited[1], 1);
 	result = reachable(map, pos, visited[0], 0)
 		&& reachable(map, pos, visited[1], 1);
 	free_map(map, pos.rows);
 	free_visited(visited[0], pos.rows);
+	free_visited(visited[1], pos.rows);
 	return (result);
 }
 

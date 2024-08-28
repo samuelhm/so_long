@@ -6,7 +6,7 @@
 #    By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/22 12:22:33 by shurtado          #+#    #+#              #
-#    Updated: 2024/08/23 20:48:14 by shurtado         ###   ########.fr        #
+#    Updated: 2024/08/28 22:51:38 by shurtado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LDFLAGS = -L$(LIBFT_DIR) -L$(LIBMLX_DIR) -L/usr/lib/X11 -lX11 -lXext -lm
 INCLUDES = -I$(INC_DIR) -I$(LIBMLX_DIR) -I$(LIBFT_DIR)/include
 
 # Debug
-#CFLAGS += -g -O1 -fsanitize=address
+#CFLAGS += -g -O0
 # Directory
 SRC_DIR = src
 OBJ_DIR = obj
